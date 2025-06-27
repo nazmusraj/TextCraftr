@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Powered Post Formatter</title>
+    <title>AI-Powered Post Formatter - A NazmusLabs Product</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,29 +23,24 @@
     <main class="bg-white w-full max-w-4xl rounded-2xl shadow-lg p-6 sm:p-8">
         <header class="text-center mb-6">
             <h1 class="text-3xl sm:text-4xl font-bold text-slate-800">AI-Powered Post Formatter</h1>
-            <p class="text-slate-500 mt-2">Generate, improve, and format posts for LinkedIn, X, and more!</p>
+            <p class="text-slate-500 mt-2 text-base">A Product of <span class="font-semibold text-slate-600">NazmusLabs</span></p>
         </header>
 
-        <!-- Toolbar -->
         <div id="toolbar" class="bg-slate-50 border border-slate-200 rounded-t-lg p-2 flex flex-wrap items-center gap-2">
-            <!-- AI Features -->
             <button id="writeWithAI" class="toolbar-btn bg-blue-100 text-blue-700 hover:bg-blue-200 font-semibold px-3">✨ Write with AI</button>
             <button id="improveWithAI" class="toolbar-btn bg-purple-100 text-purple-700 hover:bg-purple-200 font-semibold px-3">✨ Improve</button>
             <div class="h-6 w-px bg-slate-300 mx-1"></div>
             
-            <!-- Basic Formatting -->
             <button class="toolbar-btn" title="Bold" data-format="bold"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path></svg></button>
             <button class="toolbar-btn" title="Italic" data-format="italic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"></line><line x1="14" y1="20" x2="5" y2="20"></line><line x1="15" y1="4" x2="9" y2="20"></line></svg></button>
             <button class="toolbar-btn" title="Underline" data-format="underline"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path><line x1="4" y1="21" x2="20" y2="21"></line></svg></button>
             <button class="toolbar-btn" title="Strikethrough" data-format="strikethrough"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4H9a3 3 0 0 0-2.83 4"/><path d="M14 12a4 4 0 0 1 0 8H6"/><line x1="4" y1="12" x2="20" y2="12"/></svg></button>
             <div class="h-6 w-px bg-slate-300 mx-1"></div>
 
-            <!-- List Formatting -->
             <button class="toolbar-btn" title="Bullet Points" data-insert="• "><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6" /><line x1="8" x2="21" y1="12" y2="12" /><line x1="8" x2="21" y1="18" y2="18" /><line x1="3" x2="3.01" y1="6" y2="6" /><line x1="3" x2="3.01" y1="12" y2="12" /><line x1="3" x2="3.01" y1="18" y2="18" /></svg></button>
             <button class="toolbar-btn" title="Numbered List" data-insert="1. "><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" x2="21" y1="6" y2="6"/><line x1="9" x2="21" y1="12" y2="12"/><line x1="9" x2="21" y1="18" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1.5"/></svg></button>
             <div class="h-6 w-px bg-slate-300 mx-1"></div>
             
-            <!-- Font Styles -->
             <button class="toolbar-btn" data-format="bold-italic">𝐁𝐨𝐥𝐝 𝑰𝒕𝒂𝒍𝒊𝒄</button>
             <button class="toolbar-btn" data-format="bold-sans">𝗕𝗼𝗹𝗱 𝗦𝗮𝗻𝘀</button>
             <button class="toolbar-btn" data-format="italic-sans">𝘐𝘵𝘢𝘭𝘪𝘤 𝘚𝘢𝘯𝘴</button>
@@ -53,25 +48,34 @@
             <button class="toolbar-btn" data-format="monospace">𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎</button>
             <div class="h-6 w-px bg-slate-300 mx-1"></div>
 
-            <!-- Emojis -->
             <button class="toolbar-btn text-xl" title="Sparkles" data-insert="✨">✨</button>
             <button class="toolbar-btn text-xl" title="Rocket" data-insert="🚀">🚀</button>
             <button class="toolbar-btn text-xl" title="Pointing Right" data-insert="👉">👉</button>
             <button class="toolbar-btn text-xl" title="Check Mark" data-insert="✅">✅</button>
             <button class="toolbar-btn text-xl" title="Light Bulb" data-insert="💡">💡</button>
+            <div class="h-6 w-px bg-slate-300 mx-1"></div>
+            <button class="toolbar-btn" title="Clear Formatting" data-action="clear-formatting">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eraser"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21H7Z"/><path d="M22 21H7"/><path d="m5 12 5 5"/></svg>
+            </button>
         </div>
 
-        <!-- Editor Area -->
         <div id="editor" class="w-full p-4 border-x border-b border-slate-200 rounded-b-lg focus:ring-2 focus:ring-blue-500" contenteditable="true" data-placeholder="Start writing or use ✨ Write with AI ✨..."></div>
         
-        <!-- Action Buttons -->
         <div class="mt-6 flex flex-col sm:flex-row items-center gap-4">
              <button id="copyBtn" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg">Copy Formatted Text</button>
              <span id="copyMessage" class="text-green-600 font-medium opacity-0 transition-opacity duration-300">✓ Copied!</span>
         </div>
+        
+        <footer class="text-center mt-8 pt-6 border-t border-slate-200">
+            <p class="text-sm text-slate-500">
+                Created with ❤️ by 
+                <a href="https://www.mdnazmussakib.com/" target="_blank" rel="noopener noreferrer" class="font-semibold text-blue-600 hover:underline">
+                    MD. Nazmus Sakib
+                </a>
+            </p>
+        </footer>
     </main>
 
-    <!-- Modals (Write & Improve) -->
     <div id="writeModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 opacity-0 pointer-events-none">
         <div class="modal-content bg-white w-full max-w-lg rounded-lg shadow-xl p-6 transform -translate-y-10">
             <h2 class="text-2xl font-bold text-slate-800 mb-4">✨ Write with AI</h2>
@@ -102,7 +106,6 @@
     </div>
     
     <script>
-        // DOM Elements
         const editor = document.getElementById('editor');
         const toolbar = document.getElementById('toolbar');
         const copyBtn = document.getElementById('copyBtn');
@@ -110,10 +113,9 @@
         const writeModal = document.getElementById('writeModal');
         const improveModal = document.getElementById('improveModal');
 
-        // Unicode character maps for all styles
         const charMaps = {
-            'bold': { 'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟', 'g': '𝐠', 'h': '𝐡', 'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥', 'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 'q': '𝐪', 'r': '𝐫', 's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱', 'y': '𝐲', 'z': '𝐳', 'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃', 'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 'I': '𝐈', 'J': '𝐉', 'K': '𝐊', 'L': '𝐋', 'M': '𝐌', 'N': '𝐍', 'O': '𝐎', 'P': '𝐏', 'Q': '𝐐', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕', 'W': '𝐖', 'X': '𝐗', 'Y': '𝐘', 'Z': '𝐙', '0':'𝟬', '1':'𝟭', '2':'𝟮', '3':'𝟯', '4':'𝟰', '5':'𝟱', '6':'𝟲', '7':'𝟳', '8':'𝟴', '9':'𝟵'},
-            'italic': { 'a': '𝘢', 'b': '𝘣', 'c': '𝘤', 'd': '𝘥', 'e': '𝘦', 'f': '𝘧', 'g': '𝘨', 'h': '𝘩', 'i': '𝘪', 'j': '𝘫', 'k': '𝘬', 'l': '𝘭', 'm': '𝘮', 'n': '𝘯', 'o': '𝘰', 'p': '𝘱', 'q': '𝘲', 'r': '𝘳', 's': '𝘴', 't': '𝘵', 'u': '𝘶', 'v': '𝘷', 'w': '𝘸', 'x': '𝘹', 'y': '𝘺', 'z': '�', 'A': '𝘈', 'B': '𝘉', 'C': '𝘊', 'D': '𝘋', 'E': '𝘌', 'F': '𝘍', 'G': '𝘎', 'H': '𝘏', 'I': '𝘐', 'J': '𝘑', 'K': '𝘒', 'L': '𝘓', 'M': '𝘔', 'N': '𝘕', 'O': '𝘖', 'P': '𝘗', 'Q': '𝘘', 'R': '𝘙', 'S': '𝘚', 'T': '𝘛', 'U': '𝘜', 'V': '𝘝', 'W': '𝘞', 'X': '𝘟', 'Y': '𝘠', 'Z': '𝘡' },
+            'bold': { 'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟', 'g': '𝐠', 'h': '𝐡', 'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥', 'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 'q': '𝐪', 'r': '𝐫', 's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱', 'y': '𝐲', 'z': '𝐳', 'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃', 'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 'I': '𝐈', 'J': '𝐉', 'K': '𝐊', 'L': '𝐋', 'M': '𝐌', 'N': '𝐍', 'O': '𝐎', 'P': '𝐏', 'Q': '�', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕', 'W': '𝐖', 'X': '𝐗', 'Y': '𝐘', 'Z': '𝐙', '0':'𝟬', '1':'𝟭', '2':'𝟮', '3':'𝟯', '4':'𝟰', '5':'𝟱', '6':'𝟲', '7':'𝟳', '8':'𝟴', '9':'𝟵'},
+            'italic': { 'a': '𝘢', 'b': '𝘣', 'c': '𝘤', 'd': '𝘥', 'e': '𝘦', 'f': '𝘧', 'g': '𝘨', 'h': '𝘩', 'i': '𝘪', 'j': '𝘫', 'k': '𝘬', 'l': '𝘭', 'm': '𝘮', 'n': '𝘯', 'o': '𝘰', 'p': '𝘱', 'q': '𝘲', 'r': '𝘳', 's': '𝘴', 't': '𝘵', 'u': '𝘶', 'v': '𝘷', 'w': '𝘸', 'x': '𝘹', 'y': '𝘺', 'z': '𝘻', 'A': '𝘈', 'B': '𝘉', 'C': '𝘊', 'D': '𝘋', 'E': '𝘌', 'F': '𝘍', 'G': '𝘎', 'H': '𝘏', 'I': '𝘐', 'J': '𝘑', 'K': '𝘒', 'L': '𝘓', 'M': '𝘔', 'N': '𝘕', 'O': '𝘖', 'P': '𝘗', 'Q': '𝘘', 'R': '𝘙', 'S': '𝘚', 'T': '𝘛', 'U': '𝘜', 'V': '𝘝', 'W': '𝘞', 'X': '𝘟', 'Y': '𝘠', 'Z': '𝘡' },
             'bold-italic': { 'a': '𝒂', 'b': '𝒃', 'c': '𝒄', 'd': '𝒅', 'e': '𝒆', 'f': '𝒇', 'g': '𝒈', 'h': '𝒉', 'i': '𝒊', 'j': '𝒋', 'k': '𝒌', 'l': '𝒍', 'm': '𝒎', 'n': '𝒏', 'o': '𝒐', 'p': '𝒑', 'q': '𝒒', 'r': '𝒓', 's': '𝒔', 't': '𝒕', 'u': '𝒖', 'v': '𝒗', 'w': '𝒘', 'x': '𝒙', 'y': '𝒚', 'z': '𝒛', 'A': '𝑨', 'B': '𝑩', 'C': '𝑪', 'D': '𝑫', 'E': '𝑬', 'F': '𝑭', 'G': '𝑮', 'H': '𝑯', 'I': '𝑰', 'J': '𝑱', 'K': '𝑲', 'L': '𝑳', 'M': '𝑴', 'N': '𝑵', 'O': '𝑶', 'P': '𝑷', 'Q': '𝑸', 'R': '𝑹', 'S': '𝑺', 'T': '𝑻', 'U': '𝑼', 'V': '𝑽', 'W': '𝑾', 'X': '𝑿', 'Y': '𝒀', 'Z': '𝒁' },
             'bold-sans': { 'a': '𝗮', 'b': '𝗯', 'c': '𝗰', 'd': '𝗱', 'e': '𝗲', 'f': '𝗳', 'g': '𝗴', 'h': '𝗵', 'i': '𝗶', 'j': '𝗷', 'k': '𝗸', 'l': '𝗹', 'm': '𝗺', 'n': '𝗻', 'o': '𝗼', 'p': '𝗽', 'q': '𝗾', 'r': '𝗿', 's': '𝘀', 't': '𝘁', 'u': '𝘂', 'v': '𝘃', 'w': '𝘄', 'x': '𝘅', 'y': '𝘆', 'z': '𝘇', 'A': '𝗔', 'B': '𝗕', 'C': '𝗖', 'D': '𝗗', 'E': '𝗘', 'F': '𝗙', 'G': '𝗚', 'H': '𝗛', 'I': '𝗜', 'J': '𝗝', 'K': '𝗞', 'L': '𝗟', 'M': '𝗠', 'N': '𝗡', 'O': '𝗢', 'P': '𝗣', 'Q': '𝗤', 'R': '𝗥', 'S': '𝗦', 'T': '𝗧', 'U': '𝗨', 'V': '𝗩', 'W': '𝗪', 'X': '𝗫', 'Y': '𝗬', 'Z': '𝗭', '0':'𝟬', '1':'𝟭', '2':'𝟮', '3':'𝟯', '4':'𝟰', '5':'𝟱', '6':'𝟲', '7':'𝟳', '8':'𝟴', '9':'𝟵' },
             'italic-sans': { 'a': '𝘢', 'b': '𝘣', 'c': '𝘤', 'd': '𝘥', 'e': '𝘦', 'f': '𝘧', 'g': '𝘨', 'h': '𝘩', 'i': '𝘪', 'j': '𝘫', 'k': '𝘬', 'l': '𝘭', 'm': '𝘮', 'n': '𝘯', 'o': '𝘰', 'p': '𝘱', 'q': '𝘲', 'r': '𝘳', 's': '𝘴', 't': '𝘵', 'u': '𝘶', 'v': '𝘷', 'w': '𝘸', 'x': '𝘹', 'y': '𝘺', 'z': '𝘻', 'A': '𝘈', 'B': '𝘉', 'C': '𝘊', 'D': '𝘋', 'E': '𝘌', 'F': '𝘍', 'G': '𝘎', 'H': '𝘏', 'I': '𝘐', 'J': '𝘑', 'K': '𝘒', 'L': '𝘓', 'M': '𝘔', 'N': '𝘕', 'O': '𝘖', 'P': '𝘗', 'Q': '𝘘', 'R': '𝘙', 'S': '𝘚', 'T': '𝘛', 'U': '𝘜', 'V': '𝘝', 'W': '𝘞', 'X': '𝘟', 'Y': '𝘠', 'Z': '𝘡' },
@@ -123,7 +125,13 @@
             'strikethrough': { 'a':'a̶', 'b':'b̶', 'c':'c̶', 'd':'d̶', 'e':'e̶', 'f':'f̶', 'g':'g̶', 'h':'h̶', 'i':'i̶', 'j':'j̶', 'k':'k̶', 'l':'l̶', 'm':'m̶', 'n':'n̶', 'o':'o̶', 'p':'p̶', 'q':'q̶', 'r':'r̶', 's':'s̶', 't':'t̶', 'u':'u̶', 'v':'v̶', 'w':'w̶', 'x':'x̶', 'y':'y̶', 'z':'z̶', 'A':'A̶', 'B':'B̶', 'C':'C̶', 'D':'D̶', 'E':'E̶', 'F':'F̶', 'G':'G̶', 'H':'H̶', 'I':'I̶', 'J':'J̶', 'K':'K̶', 'L':'L̶', 'M':'M̶', 'N':'N̶', 'O':'O̶', 'P':'P̶', 'Q':'Q̶', 'R':'R̶', 'S':'S̶', 'T':'T̶', 'U':'U̶', 'V':'V̶', 'W':'W̶', 'X':'X̶', 'Y':'Y̶', 'Z':'Z̶', '0':'0̶', '1':'1̶', '2':'2̶', '3':'3̶', '4':'4̶', '5':'5̶', '6':'6̶', '7':'7̶', '8':'8̶', '9':'9̶'}
         };
         
-        // --- AI & Modal Logic ---
+        let reverseCharMap = {};
+        for (const format in charMaps) {
+            for (const char in charMaps[format]) {
+                reverseCharMap[charMaps[format][char]] = char;
+            }
+        }
+        
         async function callSecureAPI(prompt) {
             try {
                 const response = await fetch('/api/generate', {
@@ -177,7 +185,6 @@
             toggleModal(improveModal, false);
         });
 
-        // --- Formatting & Copy Logic ---
         document.querySelectorAll('.toolbar-btn').forEach(button => {
             button.classList.add('p-2', 'rounded-md', 'hover:bg-slate-200', 'hover:text-slate-800', 'text-slate-600', 'transition-colors', 'duration-150', 'cursor-pointer', 'font-medium');
         });
@@ -194,7 +201,8 @@
 
             const format = button.dataset.format;
             const insert = button.dataset.insert;
-
+            const action = button.dataset.action;
+            
             editor.focus();
 
             if (format) {
@@ -204,6 +212,10 @@
                 document.execCommand('insertText', false, formattedText);
             } else if (insert) {
                 document.execCommand('insertText', false, insert);
+            } else if (action === 'clear-formatting') {
+                let currentText = editor.textContent;
+                let unformattedText = currentText.split('').map(char => reverseCharMap[char] || char).join('');
+                editor.textContent = unformattedText;
             }
         });
         
@@ -233,7 +245,6 @@
             copyMessage.classList.remove('opacity-0');
             setTimeout(() => copyMessage.classList.add('opacity-0'), 2000);
         }
-
     </script>
 </body>
 </html>
