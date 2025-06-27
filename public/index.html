@@ -29,13 +29,36 @@
         <!-- Toolbar -->
         <div id="toolbar" class="bg-slate-50 border border-slate-200 rounded-t-lg p-2 flex flex-wrap items-center gap-2">
             <!-- AI Features -->
-            <button id="writeWithAI" class="toolbar-btn bg-blue-100 text-blue-700 hover:bg-blue-200">✨ Write with AI</button>
-            <button id="improveWithAI" class="toolbar-btn bg-purple-100 text-purple-700 hover:bg-purple-200">✨ Improve with AI</button>
+            <button id="writeWithAI" class="toolbar-btn bg-blue-100 text-blue-700 hover:bg-blue-200 font-semibold px-3">✨ Write with AI</button>
+            <button id="improveWithAI" class="toolbar-btn bg-purple-100 text-purple-700 hover:bg-purple-200 font-semibold px-3">✨ Improve</button>
             <div class="h-6 w-px bg-slate-300 mx-1"></div>
-            <!-- Formatting Buttons... -->
+            
+            <!-- Basic Formatting -->
             <button class="toolbar-btn" title="Bold" data-format="bold"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path></svg></button>
             <button class="toolbar-btn" title="Italic" data-format="italic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"></line><line x1="14" y1="20" x2="5" y2="20"></line><line x1="15" y1="4" x2="9" y2="20"></line></svg></button>
-            <!-- Add other formatting buttons here as before -->
+            <button class="toolbar-btn" title="Underline" data-format="underline"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path><line x1="4" y1="21" x2="20" y2="21"></line></svg></button>
+            <button class="toolbar-btn" title="Strikethrough" data-format="strikethrough"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4H9a3 3 0 0 0-2.83 4"/><path d="M14 12a4 4 0 0 1 0 8H6"/><line x1="4" y1="12" x2="20" y2="12"/></svg></button>
+            <div class="h-6 w-px bg-slate-300 mx-1"></div>
+
+            <!-- List Formatting -->
+            <button class="toolbar-btn" title="Bullet Points" data-insert="• "><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6" /><line x1="8" x2="21" y1="12" y2="12" /><line x1="8" x2="21" y1="18" y2="18" /><line x1="3" x2="3.01" y1="6" y2="6" /><line x1="3" x2="3.01" y1="12" y2="12" /><line x1="3" x2="3.01" y1="18" y2="18" /></svg></button>
+            <button class="toolbar-btn" title="Numbered List" data-insert="1. "><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" x2="21" y1="6" y2="6"/><line x1="9" x2="21" y1="12" y2="12"/><line x1="9" x2="21" y1="18" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1.5"/></svg></button>
+            <div class="h-6 w-px bg-slate-300 mx-1"></div>
+            
+            <!-- Font Styles -->
+            <button class="toolbar-btn" data-format="bold-italic">𝐁𝐨𝐥𝐝 𝑰𝒕𝒂𝒍𝒊𝒄</button>
+            <button class="toolbar-btn" data-format="bold-sans">𝗕𝗼𝗹𝗱 𝗦𝗮𝗻𝘀</button>
+            <button class="toolbar-btn" data-format="italic-sans">𝘐𝘵𝘢𝘭𝘪𝘤 𝘚𝘢𝘯𝘴</button>
+            <button class="toolbar-btn" data-format="script">𝒮𝒸𝓇𝒾𝓅𝓉</button>
+            <button class="toolbar-btn" data-format="monospace">𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎</button>
+            <div class="h-6 w-px bg-slate-300 mx-1"></div>
+
+            <!-- Emojis -->
+            <button class="toolbar-btn text-xl" title="Sparkles" data-insert="✨">✨</button>
+            <button class="toolbar-btn text-xl" title="Rocket" data-insert="🚀">🚀</button>
+            <button class="toolbar-btn text-xl" title="Pointing Right" data-insert="👉">👉</button>
+            <button class="toolbar-btn text-xl" title="Check Mark" data-insert="✅">✅</button>
+            <button class="toolbar-btn text-xl" title="Light Bulb" data-insert="💡">💡</button>
         </div>
 
         <!-- Editor Area -->
@@ -67,6 +90,8 @@
                 <option value="Make it more professional">Make it more professional</option>
                 <option value="Make it more concise">Make it more concise</option>
                 <option value="Add relevant hashtags">Add relevant hashtags</option>
+                <option value="Fix grammar and spelling">Fix grammar and spelling</option>
+                <option value="Make it more engaging">Make it more engaging</option>
              </select>
              <div id="improveLoader" class="hidden my-4 flex justify-center"><div class="spinner"></div></div>
              <div class="mt-6 flex justify-end gap-4">
@@ -84,10 +109,21 @@
         const copyMessage = document.getElementById('copyMessage');
         const writeModal = document.getElementById('writeModal');
         const improveModal = document.getElementById('improveModal');
-        // ... (other DOM elements)
 
+        // Unicode character maps for all styles
+        const charMaps = {
+            'bold': { 'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟', 'g': '𝐠', 'h': '𝐡', 'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥', 'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 'q': '𝐪', 'r': '𝐫', 's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱', 'y': '𝐲', 'z': '𝐳', 'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃', 'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 'I': '𝐈', 'J': '𝐉', 'K': '𝐊', 'L': '𝐋', 'M': '𝐌', 'N': '𝐍', 'O': '𝐎', 'P': '𝐏', 'Q': '𝐐', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕', 'W': '𝐖', 'X': '𝐗', 'Y': '𝐘', 'Z': '𝐙', '0':'𝟬', '1':'𝟭', '2':'𝟮', '3':'𝟯', '4':'𝟰', '5':'𝟱', '6':'𝟲', '7':'𝟳', '8':'𝟴', '9':'𝟵'},
+            'italic': { 'a': '𝘢', 'b': '𝘣', 'c': '𝘤', 'd': '𝘥', 'e': '𝘦', 'f': '𝘧', 'g': '𝘨', 'h': '𝘩', 'i': '𝘪', 'j': '𝘫', 'k': '𝘬', 'l': '𝘭', 'm': '𝘮', 'n': '𝘯', 'o': '𝘰', 'p': '𝘱', 'q': '𝘲', 'r': '𝘳', 's': '𝘴', 't': '𝘵', 'u': '𝘶', 'v': '𝘷', 'w': '𝘸', 'x': '𝘹', 'y': '𝘺', 'z': '�', 'A': '𝘈', 'B': '𝘉', 'C': '𝘊', 'D': '𝘋', 'E': '𝘌', 'F': '𝘍', 'G': '𝘎', 'H': '𝘏', 'I': '𝘐', 'J': '𝘑', 'K': '𝘒', 'L': '𝘓', 'M': '𝘔', 'N': '𝘕', 'O': '𝘖', 'P': '𝘗', 'Q': '𝘘', 'R': '𝘙', 'S': '𝘚', 'T': '𝘛', 'U': '𝘜', 'V': '𝘝', 'W': '𝘞', 'X': '𝘟', 'Y': '𝘠', 'Z': '𝘡' },
+            'bold-italic': { 'a': '𝒂', 'b': '𝒃', 'c': '𝒄', 'd': '𝒅', 'e': '𝒆', 'f': '𝒇', 'g': '𝒈', 'h': '𝒉', 'i': '𝒊', 'j': '𝒋', 'k': '𝒌', 'l': '𝒍', 'm': '𝒎', 'n': '𝒏', 'o': '𝒐', 'p': '𝒑', 'q': '𝒒', 'r': '𝒓', 's': '𝒔', 't': '𝒕', 'u': '𝒖', 'v': '𝒗', 'w': '𝒘', 'x': '𝒙', 'y': '𝒚', 'z': '𝒛', 'A': '𝑨', 'B': '𝑩', 'C': '𝑪', 'D': '𝑫', 'E': '𝑬', 'F': '𝑭', 'G': '𝑮', 'H': '𝑯', 'I': '𝑰', 'J': '𝑱', 'K': '𝑲', 'L': '𝑳', 'M': '𝑴', 'N': '𝑵', 'O': '𝑶', 'P': '𝑷', 'Q': '𝑸', 'R': '𝑹', 'S': '𝑺', 'T': '𝑻', 'U': '𝑼', 'V': '𝑽', 'W': '𝑾', 'X': '𝑿', 'Y': '𝒀', 'Z': '𝒁' },
+            'bold-sans': { 'a': '𝗮', 'b': '𝗯', 'c': '𝗰', 'd': '𝗱', 'e': '𝗲', 'f': '𝗳', 'g': '𝗴', 'h': '𝗵', 'i': '𝗶', 'j': '𝗷', 'k': '𝗸', 'l': '𝗹', 'm': '𝗺', 'n': '𝗻', 'o': '𝗼', 'p': '𝗽', 'q': '𝗾', 'r': '𝗿', 's': '𝘀', 't': '𝘁', 'u': '𝘂', 'v': '𝘃', 'w': '𝘄', 'x': '𝘅', 'y': '𝘆', 'z': '𝘇', 'A': '𝗔', 'B': '𝗕', 'C': '𝗖', 'D': '𝗗', 'E': '𝗘', 'F': '𝗙', 'G': '𝗚', 'H': '𝗛', 'I': '𝗜', 'J': '𝗝', 'K': '𝗞', 'L': '𝗟', 'M': '𝗠', 'N': '𝗡', 'O': '𝗢', 'P': '𝗣', 'Q': '𝗤', 'R': '𝗥', 'S': '𝗦', 'T': '𝗧', 'U': '𝗨', 'V': '𝗩', 'W': '𝗪', 'X': '𝗫', 'Y': '𝗬', 'Z': '𝗭', '0':'𝟬', '1':'𝟭', '2':'𝟮', '3':'𝟯', '4':'𝟰', '5':'𝟱', '6':'𝟲', '7':'𝟳', '8':'𝟴', '9':'𝟵' },
+            'italic-sans': { 'a': '𝘢', 'b': '𝘣', 'c': '𝘤', 'd': '𝘥', 'e': '𝘦', 'f': '𝘧', 'g': '𝘨', 'h': '𝘩', 'i': '𝘪', 'j': '𝘫', 'k': '𝘬', 'l': '𝘭', 'm': '𝘮', 'n': '𝘯', 'o': '𝘰', 'p': '𝘱', 'q': '𝘲', 'r': '𝘳', 's': '𝘴', 't': '𝘵', 'u': '𝘶', 'v': '𝘷', 'w': '𝘸', 'x': '𝘹', 'y': '𝘺', 'z': '𝘻', 'A': '𝘈', 'B': '𝘉', 'C': '𝘊', 'D': '𝘋', 'E': '𝘌', 'F': '𝘍', 'G': '𝘎', 'H': '𝘏', 'I': '𝘐', 'J': '𝘑', 'K': '𝘒', 'L': '𝘓', 'M': '𝘔', 'N': '𝘕', 'O': '𝘖', 'P': '𝘗', 'Q': '𝘘', 'R': '𝘙', 'S': '𝘚', 'T': '𝘛', 'U': '𝘜', 'V': '𝘝', 'W': '𝘞', 'X': '𝘟', 'Y': '𝘠', 'Z': '𝘡' },
+            'script': { 'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': '𝑒', 'f': '𝒻', 'g': '𝑔', 'h': '𝒽', 'i': '𝒾', 'j': '𝒿', 'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': '𝑜', 'p': '𝓅', 'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉', 'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 'y': '𝓎', 'z': '𝓏', 'A': '𝒜', 'B': 'ℬ', 'C': '𝒞', 'D': '𝒟', 'E': 'ℰ', 'F': 'ℱ', 'G': '𝒢', 'H': 'ℋ', 'I': 'ℐ', 'J': '𝒥', 'K': '𝒦', 'L': 'ℒ', 'M': 'ℳ', 'N': '𝒩', 'O': '𝒪', 'P': '𝒫', 'Q': '𝒬', 'R': 'ℛ', 'S': '𝒮', 'T': '𝒯', 'U': '𝒰', 'V': '𝒱', 'W': '𝒲', 'X': '𝒳', 'Y': '𝒴', 'Z': '𝒵' },
+            'monospace': { 'a': '𝚊', 'b': '𝚋', 'c': '𝚌', 'd': '𝚍', 'e': '𝚎', 'f': '𝚏', 'g': '𝚐', 'h': '𝚑', 'i': '𝚒', 'j': '𝚓', 'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗', 'o': '𝚘', 'p': '𝚙', 'q': '𝚚', 'r': '𝚛', 's': '𝚜', 't': '𝚝', 'u': '𝚞', 'v': '𝚟', 'w': '𝚠', 'x': '𝚡', 'y': '𝚢', 'z': '𝚣', 'A': '𝙰', 'B': '𝙱', 'C': '𝙲', 'D': '𝙳', 'E': '𝙴', 'F': '𝙵', 'G': '𝙶', 'H': '𝙷', 'I': '𝙸', 'J': '𝙹', 'K': '𝙺', 'L': '𝙻', 'M': '𝙼', 'N': '𝙽', 'O': '𝙾', 'P': '𝙿', 'Q': '𝚀', 'R': '𝚁', 'S': '𝚂', 'T': '𝚃', 'U': '𝚄', 'V': '𝚅', 'W': '𝚆', 'X': '𝚇', 'Y': '𝚈', 'Z': '𝚉', '0':'𝟶', '1':'𝟷', '2':'𝟸', '3':'𝟹', '4':'𝟺', '5':'𝟻', '6':'𝟼', '7':'𝟽', '8':'𝟾', '9':'𝟿' },
+            'underline': { 'a':'a̲', 'b':'b̲', 'c':'c̲', 'd':'d̲', 'e':'e̲', 'f':'f̲', 'g':'g̲', 'h':'h̲', 'i':'i̲', 'j':'j̲', 'k':'k̲', 'l':'l̲', 'm':'m̲', 'n':'n̲', 'o':'o̲', 'p':'p̲', 'q':'q̲', 'r':'r̲', 's':'s̲', 't':'t̲', 'u':'u̲', 'v':'v̲', 'w':'w̲', 'x':'x̲', 'y':'y̲', 'z':'z̲', 'A':'A̲', 'B':'B̲', 'C':'C̲', 'D':'D̲', 'E':'E̲', 'F':'F̲', 'G':'G̲', 'H':'H̲', 'I':'I̲', 'J':'J̲', 'K':'K̲', 'L':'L̲', 'M':'M̲', 'N':'N̲', 'O':'O̲', 'P':'P̲', 'Q':'Q̲', 'R':'R̲', 'S':'S̲', 'T':'T̲', 'U':'U̲', 'V':'V̲', 'W':'W̲', 'X':'X̲', 'Y':'Y̲', 'Z':'Z̲', '0':'0̲', '1':'1̲', '2':'2̲', '3':'3̲', '4':'4̲', '5':'5̲', '6':'6̲', '7':'7̲', '8':'8̲', '9':'9̲'},
+            'strikethrough': { 'a':'a̶', 'b':'b̶', 'c':'c̶', 'd':'d̶', 'e':'e̶', 'f':'f̶', 'g':'g̶', 'h':'h̶', 'i':'i̶', 'j':'j̶', 'k':'k̶', 'l':'l̶', 'm':'m̶', 'n':'n̶', 'o':'o̶', 'p':'p̶', 'q':'q̶', 'r':'r̶', 's':'s̶', 't':'t̶', 'u':'u̶', 'v':'v̶', 'w':'w̶', 'x':'x̶', 'y':'y̶', 'z':'z̶', 'A':'A̶', 'B':'B̶', 'C':'C̶', 'D':'D̶', 'E':'E̶', 'F':'F̶', 'G':'G̶', 'H':'H̶', 'I':'I̶', 'J':'J̶', 'K':'K̶', 'L':'L̶', 'M':'M̶', 'N':'N̶', 'O':'O̶', 'P':'P̶', 'Q':'Q̶', 'R':'R̶', 'S':'S̶', 'T':'T̶', 'U':'U̶', 'V':'V̶', 'W':'W̶', 'X':'X̶', 'Y':'Y̶', 'Z':'Z̶', '0':'0̶', '1':'1̶', '2':'2̶', '3':'3̶', '4':'4̶', '5':'5̶', '6':'6̶', '7':'7̶', '8':'8̶', '9':'9̶'}
+        };
+        
         // --- AI & Modal Logic ---
-        // Function to call our secure backend
         async function callSecureAPI(prompt) {
             try {
                 const response = await fetch('/api/generate', {
@@ -95,20 +131,31 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ prompt })
                 });
-
-                if (!response.ok) {
-                    throw new Error(`API request failed with status ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`API request failed: ${response.status}`);
                 const result = await response.json();
                 return result.text;
-
             } catch (error) {
                 console.error("Error calling secure API route:", error);
-                alert("An error occurred while contacting the AI. Please try again.");
+                alert("An error occurred with the AI. Please try again later.");
                 return null;
             }
         }
 
+        function toggleModal(modal, show) {
+            if (show) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modal.querySelector('.modal-content').classList.remove('-translate-y-10');
+            } else {
+                modal.classList.add('opacity-0');
+                setTimeout(() => modal.classList.add('pointer-events-none'), 300);
+            }
+        }
+
+        document.getElementById('writeWithAI').addEventListener('click', () => toggleModal(writeModal, true));
+        document.getElementById('improveWithAI').addEventListener('click', () => editor.textContent.trim() ? toggleModal(improveModal, true) : alert('Editor is empty. Please write something first.'));
+        document.getElementById('cancelWrite').addEventListener('click', () => toggleModal(writeModal, false));
+        document.getElementById('cancelImprove').addEventListener('click', () => toggleModal(improveModal, false));
+        
         document.getElementById('generateWrite').addEventListener('click', async () => {
             const prompt = document.getElementById('aiPrompt').value;
             if (!prompt) return;
@@ -130,21 +177,64 @@
             toggleModal(improveModal, false);
         });
 
-        // --- All other modal, formatting, and copy/paste JS functions go here ---
-        // (This code is the same as the previous version)
-        function toggleModal(modal, show) {
-            if (show) {
-                modal.classList.remove('opacity-0', 'pointer-events-none');
-                modal.querySelector('.modal-content').classList.remove('-translate-y-10');
-            } else {
-                modal.classList.add('opacity-0', 'pointer-events-none');
-            }
+        // --- Formatting & Copy Logic ---
+        document.querySelectorAll('.toolbar-btn').forEach(button => {
+            button.classList.add('p-2', 'rounded-md', 'hover:bg-slate-200', 'hover:text-slate-800', 'text-slate-600', 'transition-colors', 'duration-150', 'cursor-pointer', 'font-medium');
+        });
+
+        function convertText(str, format) {
+            const map = charMaps[format];
+            if (!map) return str;
+            return str.split('').map(char => map[char] || char).join('');
         }
-        document.getElementById('writeWithAI').addEventListener('click', () => toggleModal(writeModal, true));
-        document.getElementById('improveWithAI').addEventListener('click', () => editor.textContent.trim() && toggleModal(improveModal, true));
-        document.getElementById('cancelWrite').addEventListener('click', () => toggleModal(writeModal, false));
-        document.getElementById('cancelImprove').addEventListener('click', () => toggleModal(improveModal, false));
+
+        toolbar.addEventListener('click', (e) => {
+            const button = e.target.closest('.toolbar-btn');
+            if (!button) return;
+
+            const format = button.dataset.format;
+            const insert = button.dataset.insert;
+
+            editor.focus();
+
+            if (format) {
+                const selection = window.getSelection();
+                if (!selection.rangeCount || selection.isCollapsed) return;
+                const formattedText = convertText(selection.toString(), format);
+                document.execCommand('insertText', false, formattedText);
+            } else if (insert) {
+                document.execCommand('insertText', false, insert);
+            }
+        });
+        
+        copyBtn.addEventListener('click', () => {
+            const textToCopy = editor.textContent;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(showCopyMessage).catch(() => fallbackCopy(textToCopy));
+            } else {
+                fallbackCopy(textToCopy);
+            }
+        });
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed'; textArea.style.left = '-9999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                if (document.execCommand('copy')) showCopyMessage();
+                else alert('Copy failed. Please copy manually.');
+            } catch (err) { alert('Copy failed. Please copy manually.'); }
+            document.body.removeChild(textArea);
+        }
+
+        function showCopyMessage() {
+            copyMessage.classList.remove('opacity-0');
+            setTimeout(() => copyMessage.classList.add('opacity-0'), 2000);
+        }
 
     </script>
 </body>
 </html>
+�
