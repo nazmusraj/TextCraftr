@@ -1,0 +1,15 @@
+{
+  "name": "ai-formatter-app",
+  "version": "1.0.0",
+  "description": "AI-Powered Post Formatter",
+  "main": "index.js",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
