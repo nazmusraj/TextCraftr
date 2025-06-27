@@ -7,67 +7,83 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        #editor { outline: none; line-height: 1.6; }
-        #editor:empty:before { content: attr(data-placeholder); color: #9ca3af; cursor: text; }
-        .modal { transition: opacity 0.3s ease; }
-        .modal-content { transition: transform 0.3s ease; }
-        .spinner { border: 4px solid rgba(255, 255, 255, 0.3); width: 20px; height: 20px; border-radius: 50%; border-left-color: #fff; animation: spin 1s ease infinite; }
+        body { font-family: 'Inter', sans-serif; background-color: #f1f5f9; }
+        #editor { outline: none; line-height: 1.7; color: #334155; }
+        #editor:empty:before { content: attr(data-placeholder); color: #9ca3af; cursor: text; -webkit-user-select: none; user-select: none;}
+        .modal { transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .modal-content { transition: transform 0.3s ease, opacity 0.3s ease; }
+        .modal.open { visibility: visible; opacity: 1; }
+        .modal.open .modal-content { transform: translateY(0) scale(1); opacity: 1; }
+        .spinner { border: 3px solid rgba(255, 255, 255, 0.3); width: 20px; height: 20px; border-radius: 50%; border-left-color: #ffffff; animation: spin 1s ease-in-out infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .btn-loading .btn-text { visibility: hidden; }
-        .btn-loading .spinner-container { display: flex; }
+        .btn-loading .spinner { display: block; }
+        .toolbar-btn { transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease; padding: 0.5rem; border-radius: 0.375rem; }
+        .toolbar-btn:hover { background-color: #e2e8f0; }
     </style>
 </head>
-<body class="bg-slate-100 flex items-start sm:items-center justify-center min-h-screen p-4 pt-8 sm:pt-4">
+<body class="flex items-start sm:items-center justify-center min-h-screen p-4 pt-8 sm:pt-4 bg-slate-100">
 
-    <main class="bg-white w-full max-w-4xl rounded-2xl shadow-lg p-6 sm:p-8">
-        <header class="text-center mb-6">
-            <h1 class="text-3xl sm:text-4xl font-bold text-slate-800">TextCraftr AI</h1>
-            <p class="text-slate-500 mt-2 text-base">A Product of <span class="font-semibold text-slate-600">NazmusLabs</span></p>
+    <main class="bg-white w-full max-w-4xl rounded-2xl shadow-xl border border-slate-200/50 p-6 sm:p-8 transform transition-all duration-500">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-800 tracking-tight">TextCraftr AI</h1>
+            <p class="text-slate-500 mt-3 text-lg">A Product of <span class="font-semibold text-slate-700">NazmusLabs</span></p>
         </header>
 
-        <div id="toolbar" class="bg-slate-50 border border-slate-200 rounded-t-lg p-2 flex flex-wrap items-center gap-2">
-            <button id="writeWithAI" class="toolbar-btn bg-blue-100 text-blue-700 hover:bg-blue-200 font-semibold px-3 text-sm sm:text-base">✨ Write with AI</button>
-            <button id="improveWithAI" class="toolbar-btn bg-purple-100 text-purple-700 hover:bg-purple-200 font-semibold px-3 text-sm sm:text-base">✨ Improve</button>
-            <div class="h-6 w-px bg-slate-300 mx-1"></div>
+        <!-- Toolbar -->
+        <div id="toolbar" class="bg-slate-50 border border-slate-200/80 rounded-lg p-2 flex flex-wrap items-center gap-1.5 mb-[-1px] z-10 relative">
+            <!-- AI Features -->
+            <button id="writeWithAI" class="toolbar-btn bg-blue-100 text-blue-700 hover:bg-blue-200 font-semibold px-3 py-1.5 text-sm">✨ Write with AI</button>
+            <button id="improveWithAI" class="toolbar-btn bg-purple-100 text-purple-700 hover:bg-purple-200 font-semibold px-3 py-1.5 text-sm">🚀 Improve</button>
+            <div class="h-6 w-px bg-slate-300 mx-1.5"></div>
             
-            <button class="toolbar-btn" title="Bold (Sans)" data-format="bold"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path></svg></button>
+            <!-- Basic Formatting -->
+            <button class="toolbar-btn" title="Bold" data-format="bold"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"></path></svg></button>
             <button class="toolbar-btn" title="Italic" data-format="italic"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="4" x2="10" y2="4"></line><line x1="14" y1="20" x2="5" y2="20"></line><line x1="15" y1="4" x2="9" y2="20"></line></svg></button>
             <button class="toolbar-btn" title="Underline" data-format="underline"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v7a6 6 0 0 0 6 6 6 6 0 0 0 6-6V3"></path><line x1="4" y1="21" x2="20" y2="21"></line></svg></button>
             <button class="toolbar-btn" title="Strikethrough" data-format="strikethrough"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4H9a3 3 0 0 0-2.83 4"/><path d="M14 12a4 4 0 0 1 0 8H6"/><line x1="4" y1="12" x2="20" y2="12"/></svg></button>
-            <div class="h-6 w-px bg-slate-300 mx-1"></div>
+            <div class="h-6 w-px bg-slate-300 mx-1.5"></div>
 
+            <!-- List Formatting -->
             <button class="toolbar-btn" title="Bullet Points" data-insert="• "><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="8" x2="21" y1="6" y2="6" /><line x1="8" x2="21" y1="12" y2="12" /><line x1="8" x2="21" y1="18" y2="18" /><line x1="3" x2="3.01" y1="6" y2="6" /><line x1="3" x2="3.01" y1="12" y2="12" /><line x1="3" x2="3.01" y1="18" y2="18" /></svg></button>
-            <button class="toolbar-btn" title="Numbered List" data-insert="1. "><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="9" x2="21" y1="6" y2="6"/><line x1="9" x2="21" y1="12" y2="12"/><line x1="9" x2="21" y1="18" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1.5"/></svg></button>
-            <div class="h-6 w-px bg-slate-300 mx-1"></div>
-            
-            <button class="toolbar-btn text-sm sm:text-base" data-format="bold-italic">𝐁𝐨𝐥𝐝 𝑰𝒕𝒂𝒍𝒊𝒄</button>
-            <button class="toolbar-btn text-sm sm:text-base" data-format="bold-serif">𝐁𝐨𝐥𝐝 𝐒𝐞𝐫𝐢𝐟</button>
-            <button class="toolbar-btn text-sm sm:text-base" data-format="script">𝒮𝒸𝓇𝒾𝓅𝓉</button>
-            <button class="toolbar-btn text-sm sm:text-base" data-format="monospace">𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎</button>
-            <div class="h-6 w-px bg-slate-300 mx-1"></div>
+            <div class="h-6 w-px bg-slate-300 mx-1.5 hidden sm:block"></div>
 
-            <button class="toolbar-btn text-xl" title="Sparkles" data-insert="✨">✨</button>
-            <button class="toolbar-btn text-xl" title="Rocket" data-insert="🚀">🚀</button>
-            <button class="toolbar-btn text-xl" title="Pointing Right" data-insert="👉">👉</button>
-            <button class="toolbar-btn text-xl" title="Check Mark" data-insert="✅">✅</button>
-            <button class="toolbar-btn text-xl" title="Light Bulb" data-insert="💡">💡</button>
-            <div class="h-6 w-px bg-slate-300 mx-1"></div>
+            <!-- Font Styles -->
+            <button class="toolbar-btn !px-2 text-sm" data-format="bold-italic">𝐁𝐨𝐥𝐝 𝘐𝘵𝘢�𝘪𝘤</button>
+            <button class="toolbar-btn !px-2 text-sm" data-format="bold-serif">𝗕𝗼𝗹𝗱 𝗦𝗲𝗿𝗶𝗳</button>
+            <button class="toolbar-btn !px-2 text-sm" data-format="script">𝒮𝒸𝓇𝒾𝓅𝓉</button>
+            <button class="toolbar-btn !px-2 text-sm" data-format="monospace">𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎</button>
+            <div class="h-6 w-px bg-slate-300 mx-1.5"></div>
+            
+            <!-- Emojis -->
+            <button class="toolbar-btn !p-1 text-xl" title="Sparkles" data-insert="✨">✨</button>
+            <button class="toolbar-btn !p-1 text-xl" title="Rocket" data-insert="🚀">🚀</button>
+            <button class="toolbar-btn !p-1 text-xl" title="Light Bulb" data-insert="💡">💡</button>
+            <button class="toolbar-btn !p-1 text-xl" title="Growth Chart" data-insert="📈">📈</button>
+            <button class="toolbar-btn !p-1 text-xl" title="Target" data-insert="🎯">🎯</button>
+            <button class="toolbar-btn !p-1 text-xl" title="Handshake" data-insert="🤝">🤝</button>
+            <button class="toolbar-btn !p-1 text-xl" title="Pointing Down" data-insert="👇">👇</button>
+            <div class="h-6 w-px bg-slate-300 mx-1.5"></div>
+
+            <!-- Clear Formatting -->
             <button class="toolbar-btn" title="Clear Formatting" data-action="clear-formatting">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eraser"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21H7Z"/><path d="M22 21H7"/><path d="m5 12 5 5"/></svg>
             </button>
         </div>
 
-        <div id="editor" class="w-full p-4 border-x border-b border-slate-200 rounded-b-lg focus:ring-2 focus:ring-blue-500 min-h-[200px] sm:min-h-[250px]" contenteditable="true" data-placeholder="Start writing or use ✨ Write with AI ✨..."></div>
+        <!-- Editor Area -->
+        <div id="editor" class="w-full p-6 border border-slate-200/80 rounded-b-lg focus:ring-2 focus:ring-blue-500 min-h-[250px] sm:min-h-[300px]" contenteditable="true" data-placeholder="Start writing or use ✨ Write with AI ✨..."></div>
         
-        <div class="mt-6 flex flex-col sm:flex-row items-center gap-4">
-             <button id="copyBtn" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2 shadow-md hover:shadow-lg">Copy Formatted Text</button>
-             <span id="copyMessage" class="text-green-600 font-medium opacity-0 transition-opacity duration-300">✓ Copied!</span>
+        <!-- Action Buttons -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button id="copyBtn" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5">Copy Formatted Text</button>
+              <span id="copyMessage" class="text-green-600 font-semibold opacity-0 transition-opacity duration-300">✓ Copied!</span>
         </div>
         
-        <footer class="text-center mt-8 pt-6 border-t border-slate-200">
+        <!-- Footer -->
+        <footer class="text-center mt-10 pt-6 border-t border-slate-200">
             <p class="text-sm text-slate-500">
                 Created with ❤️ by 
                 <a href="https://www.mdnazmussakib.com/" target="_blank" rel="noopener noreferrer" class="font-semibold text-blue-600 hover:underline">
@@ -76,224 +92,288 @@
             </p>
         </footer>
     </main>
-    
-    <div id="writeModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-start sm:items-center justify-center p-4 pt-12 sm:pt-4 z-50 opacity-0 pointer-events-none">
-        <div class="modal-content bg-white w-full max-w-lg rounded-lg shadow-xl p-6 transform -translate-y-10">
+
+    <!-- Modals -->
+    <div id="writeModal" class="modal fixed inset-0 bg-black bg-opacity-60 flex items-start sm:items-center justify-center p-4 pt-12 sm:pt-4 z-50 invisible opacity-0">
+        <div class="modal-content bg-white w-full max-w-lg rounded-lg shadow-xl p-6 transform scale-95 opacity-0 -translate-y-10">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4">✨ Write with AI</h2>
-            <textarea id="aiPrompt" class="w-full p-2 border border-slate-300 rounded-md h-28 sm:h-24" placeholder="e.g., Write a LinkedIn post about the top 3 trends in renewable energy for 2025."></textarea>
+            <textarea id="aiPrompt" class="w-full p-3 border border-slate-300 rounded-md h-28 focus:ring-2 focus:ring-blue-500" placeholder="e.g., Write a LinkedIn post about the top 3 trends in renewable energy for 2025."></textarea>
             <div id="writeError" class="hidden mt-4 p-3 bg-red-100 text-red-700 rounded-md text-sm"></div>
             <div class="mt-6 flex justify-end gap-4">
-                <button id="cancelWrite" class="py-2 px-4 bg-slate-200 hover:bg-slate-300 rounded-lg">Cancel</button>
-                <button id="generateWrite" class="relative py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold flex items-center justify-center min-w-[110px]">
+                <button id="cancelWrite" class="py-2 px-4 bg-slate-200 hover:bg-slate-300 rounded-lg font-medium">Cancel</button>
+                <button id="generateWrite" class="relative py-2 px-6 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold flex items-center justify-center min-w-[120px]">
                     <span class="btn-text">Generate</span>
-                    <div class="spinner-container absolute inset-0 items-center justify-center hidden"><div class="spinner"></div></div>
+                    <div class="spinner absolute hidden"></div>
                 </button>
             </div>
         </div>
     </div>
-    
-    <div id="improveModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-start sm:items-center justify-center p-4 pt-12 sm:pt-4 z-50 opacity-0 pointer-events-none">
-        <div class="modal-content bg-white w-full max-w-lg rounded-lg shadow-xl p-6 transform -translate-y-10">
-             <h2 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4">✨ Improve with AI</h2>
-             <select id="improveAction" class="w-full p-2 border border-slate-300 rounded-md">
-                <option value="Make it more professional">Make it more professional</option>
-                <option value="Make it more concise">Make it more concise</option>
-                <option value="Add relevant hashtags">Add relevant hashtags</option>
-                <option value="Fix grammar and spelling">Fix grammar and spelling</option>
-                <option value="Make it more engaging">Make it more engaging</option>
-             </select>
-             <div id="improveError" class="hidden mt-4 p-3 bg-red-100 text-red-700 rounded-md text-sm"></div>
-             <div class="mt-6 flex justify-end gap-4">
-                <button id="cancelImprove" class="py-2 px-4 bg-slate-200 hover:bg-slate-300 rounded-lg">Cancel</button>
-                <button id="generateImprove" class="relative py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold flex items-center justify-center min-w-[110px]">
-                    <span class="btn-text">Improve</span>
-                    <div class="spinner-container absolute inset-0 items-center justify-center hidden"><div class="spinner"></div></div>
-                </button>
-            </div>
+    <div id="improveModal" class="modal fixed inset-0 bg-black bg-opacity-60 flex items-start sm:items-center justify-center p-4 pt-12 sm:pt-4 z-50 invisible opacity-0">
+        <div class="modal-content bg-white w-full max-w-lg rounded-lg shadow-xl p-6 transform scale-95 opacity-0 -translate-y-10">
+              <h2 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4">🚀 Improve with AI</h2>
+              <select id="improveAction" class="w-full p-3 border border-slate-300 rounded-md bg-white focus:ring-2 focus:ring-purple-500">
+                  <option value="Make it more professional">Make it more professional</option>
+                  <option value="Make it more concise">Make it more concise</option>
+                  <option value="Add relevant hashtags">Add relevant hashtags</option>
+                  <option value="Fix grammar and spelling">Fix grammar and spelling</option>
+                  <option value="Make it more engaging">Make it more engaging</option>
+              </select>
+              <div id="improveError" class="hidden mt-4 p-3 bg-red-100 text-red-700 rounded-md text-sm"></div>
+              <div class="mt-6 flex justify-end gap-4">
+                  <button id="cancelImprove" class="py-2 px-4 bg-slate-200 hover:bg-slate-300 rounded-lg font-medium">Cancel</button>
+                  <button id="generateImprove" class="relative py-2 px-6 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold flex items-center justify-center min-w-[120px]">
+                      <span class="btn-text">Improve</span>
+                      <div class="spinner absolute hidden"></div>
+                  </button>
+              </div>
         </div>
     </div>
     
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- DOM Elements ---
         const editor = document.getElementById('editor');
         const toolbar = document.getElementById('toolbar');
         const copyBtn = document.getElementById('copyBtn');
         const copyMessage = document.getElementById('copyMessage');
         
+        // --- Modals & AI Elements ---
         const writeModal = document.getElementById('writeModal');
         const improveModal = document.getElementById('improveModal');
         const writeError = document.getElementById('writeError');
         const improveError = document.getElementById('improveError');
+        const generateWriteBtn = document.getElementById('generateWrite');
+        const generateImproveBtn = document.getElementById('generateImprove');
 
+        // --- Unicode Character Maps for Social Media ---
         const charMaps = {
             'bold': { 'a': '𝗮', 'b': '𝗯', 'c': '𝗰', 'd': '𝗱', 'e': '𝗲', 'f': '𝗳', 'g': '𝗴', 'h': '𝗵', 'i': '𝗶', 'j': '𝗷', 'k': '𝗸', 'l': '𝗹', 'm': '𝗺', 'n': '𝗻', 'o': '𝗼', 'p': '𝗽', 'q': '𝗾', 'r': '𝗿', 's': '𝘀', 't': '𝘁', 'u': '𝘂', 'v': '𝘃', 'w': '𝘄', 'x': '𝘅', 'y': '𝘆', 'z': '𝘇', 'A': '𝗔', 'B': '𝗕', 'C': '𝗖', 'D': '𝗗', 'E': '𝗘', 'F': '𝗙', 'G': '𝗚', 'H': '𝗛', 'I': '𝗜', 'J': '𝗝', 'K': '𝗞', 'L': '𝗟', 'M': '𝗠', 'N': '𝗡', 'O': '𝗢', 'P': '𝗣', 'Q': '𝗤', 'R': '𝗥', 'S': '𝗦', 'T': '𝗧', 'U': '𝗨', 'V': '𝗩', 'W': '𝗪', 'X': '𝗫', 'Y': '𝗬', 'Z': '𝗭', '0':'𝟬', '1':'𝟭', '2':'𝟮', '3':'𝟯', '4':'𝟰', '5':'𝟱', '6':'𝟲', '7':'𝟳', '8':'𝟴', '9':'𝟵'},
             'italic': { 'a': '𝘢', 'b': '𝘣', 'c': '𝘤', 'd': '𝘥', 'e': '𝘦', 'f': '𝘧', 'g': '𝘨', 'h': '𝘩', 'i': '𝘪', 'j': '𝘫', 'k': '𝘬', 'l': '𝘭', 'm': '𝘮', 'n': '𝘯', 'o': '𝘰', 'p': '𝘱', 'q': '𝘲', 'r': '𝘳', 's': '𝘴', 't': '𝘵', 'u': '𝘶', 'v': '𝘷', 'w': '𝘸', 'x': '𝘹', 'y': '𝘺', 'z': '𝘻', 'A': '𝘈', 'B': '𝘉', 'C': '𝘊', 'D': '𝘋', 'E': '𝘌', 'F': '𝘍', 'G': '𝘎', 'H': '𝘏', 'I': '𝘐', 'J': '𝘑', 'K': '𝘒', 'L': '𝘓', 'M': '𝘔', 'N': '𝘕', 'O': '𝘖', 'P': '𝘗', 'Q': '𝘘', 'R': '𝘙', 'S': '𝘚', 'T': '𝘛', 'U': '𝘜', 'V': '𝘝', 'W': '𝘞', 'X': '𝘟', 'Y': '𝘠', 'Z': '𝘡' },
-            'bold-italic': { 'a': '𝒂', 'b': '𝒃', 'c': '𝒄', 'd': '𝒅', 'e': '𝒆', 'f': '𝒇', 'g': '𝒈', 'h': '𝒉', 'i': '𝒊', 'j': '𝒋', 'k': '𝒌', 'l': '𝒍', 'm': '𝒎', 'n': '𝒏', 'o': '𝒐', 'p': '𝒑', 'q': '𝒒', 'r': '𝒓', 's': '𝒔', 't': '𝒕', 'u': '𝒖', 'v': '𝒗', 'w': '𝒘', 'x': '𝒙', 'y': '𝒚', 'z': '𝒛', 'A': '𝑨', 'B': '𝑩', 'C': '𝑪', 'D': '𝑫', 'E': '𝑬', 'F': '𝑭', 'G': '𝑮', 'H': '𝑯', 'I': '𝑰', 'J': '𝑱', 'K': '𝑲', 'L': '𝑳', 'M': '𝑴', 'N': '𝑵', 'O': '𝑶', 'P': '𝑷', 'Q': '𝑸', 'R': '𝑹', 'S': '𝑺', 'T': '𝑻', 'U': '𝑼', 'V': '𝑽', 'W': '𝑾', 'X': '𝑿', 'Y': '𝒀', 'Z': '𝒁' },
+            'bold-italic': { 'a': '𝙖', 'b': '𝙗', 'c': '𝙘', 'd': '𝙙', 'e': '𝙚', 'f': '𝙛', 'g': '𝙜', 'h': '𝙝', 'i': '𝙞', 'j': '𝙟', 'k': '𝙠', 'l': '𝙡', 'm': '𝙢', 'n': '𝙣', 'o': '𝙤', 'p': '𝙥', 'q': '𝙦', 'r': '𝙧', 's': '𝙨', 't': '𝙩', 'u': '𝙪', 'v': '𝙫', 'w': '𝙬', 'x': '𝙭', 'y': '𝙮', 'z': '𝙯', 'A': '𝘼', 'B': '𝘽', 'C': '𝘾', 'D': '𝘿', 'E': '𝙀', 'F': '𝙁', 'G': '𝙂', 'H': '𝙃', 'I': '𝙄', 'J': '𝙅', 'K': '𝙆', 'L': '𝙇', 'M': '𝙈', 'N': '𝙉', 'O': '𝙊', 'P': '𝙋', 'Q': '𝙌', 'R': '𝙍', 'S': '𝙎', 'T': '𝙏', 'U': '𝙐', 'V': '𝙑', 'W': '𝙒', 'X': '𝙓', 'Y': '𝙔', 'Z': '𝙕'},
             'bold-serif': { 'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟', 'g': '𝐠', 'h': '𝐡', 'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥', 'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 'q': '𝐪', 'r': '𝐫', 's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱', 'y': '𝐲', 'z': '𝐳', 'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃', 'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 'I': '𝐈', 'J': '𝐉', 'K': '𝐊', 'L': '𝐋', 'M': '𝐌', 'N': '𝐍', 'O': '𝐎', 'P': '𝐏', 'Q': '𝐐', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕', 'W': '𝐖', 'X': '𝐗', 'Y': '𝐘', 'Z': '𝐙', '0':'𝟬', '1':'𝟭', '2':'𝟮', '3':'𝟯', '4':'𝟰', '5':'𝟱', '6':'𝟲', '7':'𝟳', '8':'𝟴', '9':'𝟵'},
             'script': { 'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': '𝑒', 'f': '𝒻', 'g': '𝑔', 'h': '𝒽', 'i': '𝒾', 'j': '𝒿', 'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': '𝑜', 'p': '𝓅', 'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉', 'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 'y': '𝓎', 'z': '𝓏', 'A': '𝒜', 'B': 'ℬ', 'C': '𝒞', 'D': '𝒟', 'E': 'ℰ', 'F': 'ℱ', 'G': '𝒢', 'H': 'ℋ', 'I': 'ℐ', 'J': '𝒥', 'K': '𝒦', 'L': 'ℒ', 'M': 'ℳ', 'N': '𝒩', 'O': '𝒪', 'P': '𝒫', 'Q': '𝒬', 'R': 'ℛ', 'S': '𝒮', 'T': '𝒯', 'U': '𝒰', 'V': '𝒱', 'W': '𝒲', 'X': '𝒳', 'Y': '𝒴', 'Z': '𝒵' },
-            'monospace': { 'a': '𝚊', 'b': '𝚋', 'c': '𝚌', 'd': '𝚍', 'e': '𝚎', 'f': '𝚏', 'g': '𝚐', 'h': '𝚑', 'i': '𝚒', 'j': '𝚓', 'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗', 'o': '𝚘', 'p': '𝚙', 'q': '𝚚', 'r': '𝚛', 's': '𝚜', 't': '𝚝', 'u': '𝚞', 'v': '𝚟', 'w': '𝚠', 'x': '𝚡', 'y': '𝚢', 'z': '𝚣', 'A': '𝙰', 'B': '𝙱', 'C': '𝙲', 'D': '𝙳', 'E': '𝙴', 'F': '𝙵', 'G': '𝙶', 'H': '𝙷', 'I': '𝙸', 'J': '𝙹', 'K': '𝙺', 'L': '𝙻', 'M': '𝙼', 'N': '𝙽', 'O': '𝙾', 'P': '𝙿', 'Q': '𝚀', 'R': '𝚁', 'S': '𝚂', 'T': '𝚃', 'U': '𝚄', 'V': '𝚅', 'W': '𝚆', 'X': '𝚇', 'Y': '𝚈', 'Z': '𝚉', '0':'𝟶', '1':'𝟷', '2':'𝟸', '3':'𝟹', '4':'𝟺', '5':'𝟻', '6':'𝟼', '7':'𝟽', '8':'𝟾', '9':'𝟿' },
-            'underline': { 'a':'a̲', 'b':'b̲', 'c':'c̲', 'd':'d̲', 'e':'e̲', 'f':'f̲', 'g':'g̲', 'h':'h̲', 'i':'i̲', 'j':'j̲', 'k':'k̲', 'l':'l̲', 'm':'m̲', 'n':'n̲', 'o':'o̲', 'p':'p̲', 'q':'q̲', 'r':'r̲', 's':'s̲', 't':'t̲', 'u':'u̲', 'v':'v̲', 'w':'w̲', 'x':'x̲', 'y':'y̲', 'z':'z̲', 'A':'A̲', 'B':'B̲', 'C':'C̲', 'D':'D̲', 'E':'E̲', 'F':'F̲', 'G':'G̲', 'H':'H̲', 'I':'I̲', 'J':'J̲', 'K':'K̲', 'L':'L̲', 'M':'M̲', 'N':'N̲', 'O':'O̲', 'P':'P̲', 'Q':'Q̲', 'R':'R̲', 'S':'S̲', 'T':'T̲', 'U':'U̲', 'V':'V̲', 'W':'W̲', 'X':'X̲', 'Y':'Y̲', 'Z':'Z̲', '0':'0̲', '1':'1̲', '2':'2̲', '3':'3̲', '4':'4̲', '5':'5̲', '6':'6̲', '7':'7̲', '8':'8̲', '9':'9̲'},
-            'strikethrough': { 'a':'a̶', 'b':'b̶', 'c':'c̶', 'd':'d̶', 'e':'e̶', 'f':'f̶', 'g':'g̶', 'h':'h̶', 'i':'i̶', 'j':'j̶', 'k':'k̶', 'l':'l̶', 'm':'m̶', 'n':'n̶', 'o':'o̶', 'p':'p̶', 'q':'q̶', 'r':'r̶', 's':'s̶', 't':'t̶', 'u':'u̶', 'v':'v̶', 'w':'w̶', 'x':'x̶', 'y':'y̶', 'z':'z̶', 'A':'A̶', 'B':'B̶', 'C':'C̶', 'D':'D̶', 'E':'E̶', 'F':'F̶', 'G':'G̶', 'H':'H̶', 'I':'I̶', 'J':'J̶', 'K':'K̶', 'L':'L̶', 'M':'M̶', 'N':'N̶', 'O':'O̶', 'P':'P̶', 'Q':'Q̶', 'R':'R̶', 'S':'S̶', 'T':'T̶', 'U':'U̶', 'V':'V̶', 'W':'W̶', 'X':'X̶', 'Y':'Y̶', 'Z':'Z̶', '0':'0̶', '1':'1̶', '2':'2̶', '3':'3̶', '4':'4̶', '5':'5̶', '6':'6̶', '7':'7̶', '8':'8̶', '9':'9̶'}
+            'monospace': { 'a': '𝚊', 'b': '𝚋', 'c': '𝚌', 'd': '𝚍', 'e': '𝚎', 'f': '𝚏', 'g': '𝚐', 'h': '𝚑', 'i': '𝚒', 'j': '𝚓', 'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗', 'o': '𝚘', 'p': '𝚙', 'q': '𝚚', 'r': '𝚛', 's': '𝚜', 't': '𝚝', 'u': '𝚞', 'v': '𝚟', 'w': '𝚠', 'x': '𝚡', 'y': '𝚢', 'z': '𝚣', 'A': '𝙰', 'B': '𝙱', 'C': '𝙲', 'D': '𝙳', 'E': '𝙴', 'F': '𝙵', 'G': '𝙶', 'H': '𝙷', 'I': '𝙸', 'J': '𝙹', 'K': '𝙺', 'L': '𝙻', 'M': '𝙼', 'N': '𝙽', 'O': '𝙾', 'P': '𝙿', 'Q': '𝚀', 'R': '𝚁', 'S': '𝚂', 'T': '𝚃', 'U': '𝚄', 'V': '𝚅', 'W': '𝚆', 'X': '𝚇', 'Y': '𝚈', 'Z': '𝚉', '0':'𝟶', '1':'𝟷', '2':'𝟸', '3':'𝟹', '𝟺':'𝟺', '5':'𝟻', '6':'𝟼', '7':'𝟽', '8':'𝟾', '9':'𝟿' },
+            'underline': {'a':'a̲','b':'b̲','c':'c̲','d':'d̲','e':'e̲','f':'f̲','g':'g̲','h':'h̲','i':'i̲','j':'j̲','k':'k̲','l':'l̲','m':'m̲','n':'n̲','o':'o̲','p':'p̲','q':'q̲','r':'r̲','s':'s̲','t':'t̲','u':'u̲','v':'v̲','w':'w̲','x':'x̲','y':'y̲','z':'z̲','A':'A̲','B':'B̲','C':'C̲','D':'D̲','E':'E̲','F':'F̲','G':'G̲','H':'H̲','I':'I̲','J':'J̲','K':'K̲','L':'L̲','M':'M̲','N':'N̲','O':'O̲','P':'P̲','Q':'Q̲','R':'R̲','S':'S̲','T':'T̲','U':'U̲','V':'V̲','W':'W̲','X':'X̲','Y':'Y̲','Z':'Z̲','0':'0̲','1':'1̲','2':'2̲','3':'3̲','4':'4̲','5':'5̲','6':'6̲','7':'7̲','8':'8̲','9':'9̲'},
+            'strikethrough': {'a':'a̶','b':'b̶','c':'c̶','d':'d̶','e':'e̶','f':'f̶','g':'g̶','h':'h̶','i':'i̶','j':'j̶','k':'k̶','l':'l̶','m':'m̶','n':'n̶','o':'o̶','p':'p̶','q':'q̶','r':'r̶','s':'s̶','t':'t̶','u':'u̶','v':'v̶','w':'w̶','x':'x̶','y':'y̶','z':'z̶','A':'A̶','B':'B̶','C':'C̶','D':'D̶','E':'E̶','F':'F̶','G':'G̶','H':'H̶','I':'I̶','J':'J̶','K':'K̶','L':'L̶','M':'M̶','N':'N̶','O':'O̶','P':'P̶','Q':'Q̶','R':'R̶','S':'S̶','T':'T̶','U':'U̶','V':'V̶','W':'W̶','X':'X̶','Y':'Y̶','Z':'Z̶','0':'0̶','1':'1̶','2':'2̶','3':'3̶','4':'4̶','5':'5̶','6':'6̶','7':'7̶','8':'8̶','9':'9̶'}
         };
         
-        const reverseCharMap = Object.fromEntries(
-            Object.values(charMaps).flatMap(map => Object.entries(map).map(([plain, unicode]) => [unicode, plain]))
-        );
+        // Build a reverse map for un-formatting text
+        const reverseCharMap = Object.values(charMaps).reduce((acc, formatMap) => {
+            for (const [normal, styled] of Object.entries(formatMap)) {
+                acc[styled] = normal;
+            }
+            return acc;
+        }, {});
 
-        const convertText = (str, format) => str.split('').map(char => charMaps[format]?.[char] || char).join('');
-        const normalizeText = (str) => str.split('').map(char => reverseCharMap[char] || char).join('');
+        // --- Core Formatting Logic ---
+        function clearFormatting(text) {
+            let partiallyClearedText = text.split('').map(char => reverseCharMap[char] || char).join('');
+            return partiallyClearedText.replace(/[\u{1D400}-\u{1D7FF}]/gu, (match) => {
+                return reverseCharMap[match] || match; 
+            });
+        }
         
         function applyFormat(format) {
+            const map = charMaps[format];
+            if (!map) return;
             editor.focus();
             const selection = window.getSelection();
-            if (!selection.rangeCount) return;
-
-            const range = selection.getRangeAt(0);
-            const selectedText = range.toString();
-
-            if (selectedText) {
-                const plainText = normalizeText(selectedText);
-                const newText = format === 'clear' ? plainText : convertText(plainText, format);
-                
+            const transform = (text) => text.split('').map(char => map[char] || char).join('');
+            
+            if (selection.rangeCount > 0 && !selection.isCollapsed) {
+                const range = selection.getRangeAt(0);
+                const selectedText = range.toString();
+                const plainText = clearFormatting(selectedText);
+                const formattedText = transform(plainText);
                 range.deleteContents();
-                range.insertNode(document.createTextNode(newText));
-
-                // Re-select the newly inserted text
+                const newNode = document.createTextNode(formattedText);
+                range.insertNode(newNode);
                 selection.removeAllRanges();
+                range.selectNodeContents(newNode);
                 selection.addRange(range);
-            } else if (format === 'clear') {
-                editor.textContent = normalizeText(editor.textContent);
+            } else {
+                const currentText = editor.innerText;
+                const plainText = clearFormatting(currentText);
+                editor.innerText = transform(plainText);
+                placeCursorAtEnd(editor);
+            }
+        }
+        
+        function placeCursorAtEnd(el) {
+            const range = document.createRange();
+            const sel = window.getSelection();
+            range.selectNodeContents(el);
+            range.collapse(false);
+            sel.removeAllRanges();
+            sel.addRange(range);
+        }
+
+        // --- Toolbar Event Handling ---
+        toolbar.addEventListener('click', (e) => {
+            const button = e.target.closest('button');
+            if (!button || button.id.includes('WithAI')) return;
+            const { format, insert, action } = button.dataset;
+            if (format) {
+                applyFormat(format);
+            } else if (insert) {
+                document.execCommand('insertText', false, insert);
+            } else if (action === 'clear-formatting') {
+                 editor.innerText = clearFormatting(editor.innerText);
+                 placeCursorAtEnd(editor);
+            }
+        });
+        
+        // --- AI & Modal Logic ---
+        function toggleModal(modal, show) {
+            if (!modal) return;
+            const errorEl = modal.querySelector('[id$="Error"]');
+            if (show) {
+                modal.classList.add('open');
+            } else {
+                modal.classList.remove('open');
+                if (errorEl) errorEl.classList.add('hidden');
             }
         }
 
-        toolbar.addEventListener('click', (e) => {
-            const button = e.target.closest('.toolbar-btn');
-            if (!button) return;
-            
-            const { format, insert, action } = button.dataset;
-
-            if (format) {
-                applyFormat(format);
-            } else if (action === 'clear-formatting') {
-                applyFormat('clear');
-            } else if (insert) {
-                document.execCommand('insertText', false, insert);
-            }
-        });
-
-        // AI Feature Logic
-        async function callSecureAPI(prompt, errorElement) {
+        function setLoading(button, isLoading) {
+            button.disabled = isLoading;
+            button.classList.toggle('btn-loading', isLoading);
+            button.querySelector('.spinner').classList.toggle('hidden', !isLoading);
+            button.querySelector('.btn-text').style.visibility = isLoading ? 'hidden' : 'visible';
+        }
+        
+        /**
+         * Calls the backend Vercel function, which securely calls the Gemini API.
+         */
+        async function callBackendAPI(prompt, errorElement) {
             errorElement.classList.add('hidden');
             errorElement.textContent = '';
+            
+            // The API endpoint for your Vercel serverless function
+            const apiUrl = '/api/generate'; 
+            // The simplified payload your backend expects
+            const payload = { prompt: prompt }; 
+
             try {
-                const response = await fetch('/api/generate', {
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt })
+                    body: JSON.stringify(payload)
                 });
-                if (!response.ok) {
-                    let errorMessage = `API request failed: ${response.statusText} (${response.status}).`;
-                    try {
-                        const errorData = await response.json();
-                        if (errorData.message && (errorData.message.toLowerCase().includes('billing') || errorData.message.toLowerCase().includes('quota'))) {
-                           errorMessage = "AI Feature Error: The API limit may have been reached or there's a billing issue. Please check your Google AI Platform account.";
-                        } else {
-                           errorMessage = errorData.message || errorMessage;
-                        }
-                    } catch (e) { /* Response wasn't JSON */ }
-                    throw new Error(errorMessage);
-                }
+                
                 const result = await response.json();
-                return result.text;
+
+                if (!response.ok) {
+                    throw new Error(result.message || `API request failed with status ${response.status}`);
+                }
+                
+                // The backend returns a simple { text: "..." } object
+                return result.text; 
+
             } catch (error) {
-                console.error("Error calling API:", error);
-                errorElement.textContent = error.message;
+                console.error("Error calling backend API:", error);
+                errorElement.textContent = `Error: ${error.message}`;
                 errorElement.classList.remove('hidden');
                 return null;
             }
         }
-
-        function toggleModal(modal, show) {
-            if (show) {
-                modal.classList.remove('opacity-0', 'pointer-events-none');
-                modal.querySelector('.modal-content').classList.remove('-translate-y-10');
-            } else {
-                modal.classList.add('opacity-0');
-                modal.querySelector('.modal-content').classList.add('-translate-y-10');
-                setTimeout(() => {
-                    modal.classList.add('pointer-events-none');
-                    modal.querySelector('[id$="Error"]')?.classList.add('hidden');
-                }, 300);
-            }
-        }
-
-        function toggleButtonSpinner(button, isLoading) {
-            button.disabled = isLoading;
-            button.classList.toggle('btn-loading', isLoading);
-        }
-
+        
+        // AI Button Event Listeners
         document.getElementById('writeWithAI').addEventListener('click', () => toggleModal(writeModal, true));
-        document.getElementById('improveWithAI').addEventListener('click', () => editor.textContent.trim() ? toggleModal(improveModal, true) : alert('Editor is empty. Please write something first.'));
         document.getElementById('cancelWrite').addEventListener('click', () => toggleModal(writeModal, false));
+        
+        document.getElementById('improveWithAI').addEventListener('click', () => {
+            if (editor.innerText.trim()) {
+                toggleModal(improveModal, true);
+            } else {
+                alert('Editor is empty. Please write something first to improve it.');
+            }
+        });
         document.getElementById('cancelImprove').addEventListener('click', () => toggleModal(improveModal, false));
         
-        const generateWriteBtn = document.getElementById('generateWrite');
+        // AI Generation Handlers
         generateWriteBtn.addEventListener('click', async () => {
             const prompt = document.getElementById('aiPrompt').value;
-            if (!prompt) return;
-            toggleButtonSpinner(generateWriteBtn, true);
+            if (!prompt.trim()) {
+                writeError.textContent = 'Please enter a prompt.';
+                writeError.classList.remove('hidden');
+                return;
+            };
+            
+            setLoading(generateWriteBtn, true);
             try {
-                const generatedText = await callSecureAPI(prompt, writeError);
+                // Use the new backend-facing API call function
+                const generatedText = await callBackendAPI(prompt, writeError); 
                 if (generatedText !== null) {
-                    editor.textContent = generatedText;
+                    editor.innerText = generatedText;
                     toggleModal(writeModal, false);
                     document.getElementById('aiPrompt').value = '';
                 }
             } finally {
-                toggleButtonSpinner(generateWriteBtn, false);
-            }
-        });
-
-        const generateImproveBtn = document.getElementById('generateImprove');
-        generateImproveBtn.addEventListener('click', async () => {
-            const originalText = editor.textContent.trim();
-            if (!originalText) return;
-            const action = document.getElementById('improveAction').value;
-            const prompt = `${action}: "${originalText}"`;
-            toggleButtonSpinner(generateImproveBtn, true);
-            try {
-                const improvedText = await callSecureAPI(prompt, improveError);
-                if (improvedText !== null) {
-                    editor.textContent = improvedText;
-                    toggleModal(improveModal, false);
-                }
-            } finally {
-                toggleButtonSpinner(generateImproveBtn, false);
+                setLoading(generateWriteBtn, false);
             }
         });
         
-        // Copy Logic
-        copyBtn.addEventListener('click', () => {
-            const textToCopy = editor.textContent;
-            if (!textToCopy) return;
-            navigator.clipboard.writeText(textToCopy).then(showCopyMessage).catch(() => fallbackCopy(textToCopy));
+        generateImproveBtn.addEventListener('click', async () => {
+            const originalText = editor.innerText.trim();
+            if (!originalText) return;
+            
+            const action = document.getElementById('improveAction').value;
+            const prompt = `${action}:\n\n"${originalText}"`;
+            
+            setLoading(generateImproveBtn, true);
+            try {
+                // Use the new backend-facing API call function
+                const improvedText = await callBackendAPI(prompt, improveError); 
+                if (improvedText !== null) {
+                    editor.innerText = improvedText;
+                    toggleModal(improveModal, false);
+                }
+            } finally {
+                setLoading(generateImproveBtn, false);
+            }
         });
 
+        // --- Clipboard Logic ---
+        copyBtn.addEventListener('click', () => {
+            const textToCopy = editor.innerText;
+            if (!textToCopy) return;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                showCopyMessage();
+            }).catch(err => {
+                console.error('Could not copy text: ', err);
+                fallbackCopy(textToCopy);
+            });
+        });
+        
         function fallbackCopy(text) {
             const textArea = document.createElement('textarea');
             textArea.value = text;
-            textArea.style.position = 'fixed'; textArea.style.left = '-9999px';
+            textArea.style.position = 'fixed'; 
+            textArea.style.top = '-9999px';
+            textArea.style.left = '-9999px';
             document.body.appendChild(textArea);
-            textArea.focus(); textArea.select();
-            try { document.execCommand('copy') ? showCopyMessage() : alert('Copy failed.'); } catch (err) { alert('Copy failed.'); }
+            textArea.focus();
+            textArea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopyMessage();
+                } else {
+                   alert('Copying text failed. Please copy it manually.');
+                }
+            } catch (err) {
+                 alert('Copying text failed. Please copy it manually.');
+            }
             document.body.removeChild(textArea);
         }
 
         function showCopyMessage() {
             copyMessage.classList.remove('opacity-0');
-            setTimeout(() => copyMessage.classList.add('opacity-0'), 2000);
+            setTimeout(() => copyMessage.classList.add('opacity-0'), 2500);
         }
     });
     </script>
 </body>
 </html>
+�
