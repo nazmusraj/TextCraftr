@@ -16,8 +16,6 @@
         .modal-content { transition: transform 0.3s ease; }
         .spinner { border: 4px solid rgba(255, 255, 255, 0.3); width: 20px; height: 20px; border-radius: 50%; border-left-color: #fff; animation: spin 1s ease infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        
-        /* Utility class to manage button loading state */
         .btn-loading .btn-text { visibility: hidden; }
         .btn-loading .spinner-container { display: flex; }
     </style>
@@ -47,7 +45,6 @@
             
             <button class="toolbar-btn text-sm sm:text-base" data-format="bold-italic">𝐁𝐨𝐥𝐝 𝑰𝒕𝒂𝒍𝒊𝒄</button>
             <button class="toolbar-btn text-sm sm:text-base" data-format="bold-serif">𝐁𝐨𝐥𝐝 𝐒𝐞𝐫𝐢𝐟</button>
-            <button class="toolbar-btn text-sm sm:text-base" data-format="italic-sans">𝘐𝘵𝘢𝘭𝘪𝘤 𝘚𝘢𝘯𝘴</button>
             <button class="toolbar-btn text-sm sm:text-base" data-format="script">𝒮𝒸𝓇𝒾𝓅𝓉</button>
             <button class="toolbar-btn text-sm sm:text-base" data-format="monospace">𝙼𝚘𝚗𝚘𝚜𝚙𝚊𝚌𝚎</button>
             <div class="h-6 w-px bg-slate-300 mx-1"></div>
@@ -84,16 +81,12 @@
         <div class="modal-content bg-white w-full max-w-lg rounded-lg shadow-xl p-6 transform -translate-y-10">
             <h2 class="text-xl sm:text-2xl font-bold text-slate-800 mb-4">✨ Write with AI</h2>
             <textarea id="aiPrompt" class="w-full p-2 border border-slate-300 rounded-md h-28 sm:h-24" placeholder="e.g., Write a LinkedIn post about the top 3 trends in renewable energy for 2025."></textarea>
-            
             <div id="writeError" class="hidden mt-4 p-3 bg-red-100 text-red-700 rounded-md text-sm"></div>
-            
             <div class="mt-6 flex justify-end gap-4">
                 <button id="cancelWrite" class="py-2 px-4 bg-slate-200 hover:bg-slate-300 rounded-lg">Cancel</button>
                 <button id="generateWrite" class="relative py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold flex items-center justify-center min-w-[110px]">
                     <span class="btn-text">Generate</span>
-                    <div class="spinner-container absolute inset-0 items-center justify-center hidden">
-                        <div class="spinner"></div>
-                    </div>
+                    <div class="spinner-container absolute inset-0 items-center justify-center hidden"><div class="spinner"></div></div>
                 </button>
             </div>
         </div>
@@ -109,16 +102,12 @@
                 <option value="Fix grammar and spelling">Fix grammar and spelling</option>
                 <option value="Make it more engaging">Make it more engaging</option>
              </select>
-
              <div id="improveError" class="hidden mt-4 p-3 bg-red-100 text-red-700 rounded-md text-sm"></div>
-             
              <div class="mt-6 flex justify-end gap-4">
                 <button id="cancelImprove" class="py-2 px-4 bg-slate-200 hover:bg-slate-300 rounded-lg">Cancel</button>
                 <button id="generateImprove" class="relative py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold flex items-center justify-center min-w-[110px]">
                     <span class="btn-text">Improve</span>
-                    <div class="spinner-container absolute inset-0 items-center justify-center hidden">
-                        <div class="spinner"></div>
-                    </div>
+                    <div class="spinner-container absolute inset-0 items-center justify-center hidden"><div class="spinner"></div></div>
                 </button>
             </div>
         </div>
@@ -141,20 +130,58 @@
             'italic': { 'a': '𝘢', 'b': '𝘣', 'c': '𝘤', 'd': '𝘥', 'e': '𝘦', 'f': '𝘧', 'g': '𝘨', 'h': '𝘩', 'i': '𝘪', 'j': '𝘫', 'k': '𝘬', 'l': '𝘭', 'm': '𝘮', 'n': '𝘯', 'o': '𝘰', 'p': '𝘱', 'q': '𝘲', 'r': '𝘳', 's': '𝘴', 't': '𝘵', 'u': '𝘶', 'v': '𝘷', 'w': '𝘸', 'x': '𝘹', 'y': '𝘺', 'z': '𝘻', 'A': '𝘈', 'B': '𝘉', 'C': '𝘊', 'D': '𝘋', 'E': '𝘌', 'F': '𝘍', 'G': '𝘎', 'H': '𝘏', 'I': '𝘐', 'J': '𝘑', 'K': '𝘒', 'L': '𝘓', 'M': '𝘔', 'N': '𝘕', 'O': '𝘖', 'P': '𝘗', 'Q': '𝘘', 'R': '𝘙', 'S': '𝘚', 'T': '𝘛', 'U': '𝘜', 'V': '𝘝', 'W': '𝘞', 'X': '𝘟', 'Y': '𝘠', 'Z': '𝘡' },
             'bold-italic': { 'a': '𝒂', 'b': '𝒃', 'c': '𝒄', 'd': '𝒅', 'e': '𝒆', 'f': '𝒇', 'g': '𝒈', 'h': '𝒉', 'i': '𝒊', 'j': '𝒋', 'k': '𝒌', 'l': '𝒍', 'm': '𝒎', 'n': '𝒏', 'o': '𝒐', 'p': '𝒑', 'q': '𝒒', 'r': '𝒓', 's': '𝒔', 't': '𝒕', 'u': '𝒖', 'v': '𝒗', 'w': '𝒘', 'x': '𝒙', 'y': '𝒚', 'z': '𝒛', 'A': '𝑨', 'B': '𝑩', 'C': '𝑪', 'D': '𝑫', 'E': '𝑬', 'F': '𝑭', 'G': '𝑮', 'H': '𝑯', 'I': '𝑰', 'J': '𝑱', 'K': '𝑲', 'L': '𝑳', 'M': '𝑴', 'N': '𝑵', 'O': '𝑶', 'P': '𝑷', 'Q': '𝑸', 'R': '𝑹', 'S': '𝑺', 'T': '𝑻', 'U': '𝑼', 'V': '𝑽', 'W': '𝑾', 'X': '𝑿', 'Y': '𝒀', 'Z': '𝒁' },
             'bold-serif': { 'a': '𝐚', 'b': '𝐛', 'c': '𝐜', 'd': '𝐝', 'e': '𝐞', 'f': '𝐟', 'g': '𝐠', 'h': '𝐡', 'i': '𝐢', 'j': '𝐣', 'k': '𝐤', 'l': '𝐥', 'm': '𝐦', 'n': '𝐧', 'o': '𝐨', 'p': '𝐩', 'q': '𝐪', 'r': '𝐫', 's': '𝐬', 't': '𝐭', 'u': '𝐮', 'v': '𝐯', 'w': '𝐰', 'x': '𝐱', 'y': '𝐲', 'z': '𝐳', 'A': '𝐀', 'B': '𝐁', 'C': '𝐂', 'D': '𝐃', 'E': '𝐄', 'F': '𝐅', 'G': '𝐆', 'H': '𝐇', 'I': '𝐈', 'J': '𝐉', 'K': '𝐊', 'L': '𝐋', 'M': '𝐌', 'N': '𝐍', 'O': '𝐎', 'P': '𝐏', 'Q': '𝐐', 'R': '𝐑', 'S': '𝐒', 'T': '𝐓', 'U': '𝐔', 'V': '𝐕', 'W': '𝐖', 'X': '𝐗', 'Y': '𝐘', 'Z': '𝐙', '0':'𝟬', '1':'𝟭', '2':'𝟮', '3':'𝟯', '4':'𝟰', '5':'𝟱', '6':'𝟲', '7':'𝟳', '8':'𝟴', '9':'𝟵'},
-            'italic-sans': { 'a': '𝘢', 'b': '𝘣', 'c': '𝘤', 'd': '𝘥', 'e': '𝘦', 'f': '𝘧', 'g': '𝘨', 'h': '𝘩', 'i': '𝘪', 'j': '𝘫', 'k': '𝘬', 'l': '𝘭', 'm': '𝘮', 'n': '𝘯', 'o': '𝘰', 'p': '𝘱', 'q': '𝘲', 'r': '𝘳', 's': '𝘴', 't': '𝘵', 'u': '𝘶', 'v': '𝘷', 'w': '𝘸', 'x': '𝘹', 'y': '𝘺', 'z': '𝘻', 'A': '𝘈', 'B': '𝘉', 'C': '𝘊', 'D': '𝘋', 'E': '𝘌', 'F': '𝘍', 'G': '𝘎', 'H': '𝘏', 'I': '𝘐', 'J': '𝘑', 'K': '𝘒', 'L': '𝘓', 'M': '𝘔', 'N': '𝘕', 'O': '𝘖', 'P': '𝘗', 'Q': '𝘘', 'R': '𝘙', 'S': '𝘚', 'T': '𝘛', 'U': '𝘜', 'V': '𝘝', 'W': '𝘞', 'X': '𝘟', 'Y': '𝘠', 'Z': '𝘡' },
             'script': { 'a': '𝒶', 'b': '𝒷', 'c': '𝒸', 'd': '𝒹', 'e': '𝑒', 'f': '𝒻', 'g': '𝑔', 'h': '𝒽', 'i': '𝒾', 'j': '𝒿', 'k': '𝓀', 'l': '𝓁', 'm': '𝓂', 'n': '𝓃', 'o': '𝑜', 'p': '𝓅', 'q': '𝓆', 'r': '𝓇', 's': '𝓈', 't': '𝓉', 'u': '𝓊', 'v': '𝓋', 'w': '𝓌', 'x': '𝓍', 'y': '𝓎', 'z': '𝓏', 'A': '𝒜', 'B': 'ℬ', 'C': '𝒞', 'D': '𝒟', 'E': 'ℰ', 'F': 'ℱ', 'G': '𝒢', 'H': 'ℋ', 'I': 'ℐ', 'J': '𝒥', 'K': '𝒦', 'L': 'ℒ', 'M': 'ℳ', 'N': '𝒩', 'O': '𝒪', 'P': '𝒫', 'Q': '𝒬', 'R': 'ℛ', 'S': '𝒮', 'T': '𝒯', 'U': '𝒰', 'V': '𝒱', 'W': '𝒲', 'X': '𝒳', 'Y': '𝒴', 'Z': '𝒵' },
             'monospace': { 'a': '𝚊', 'b': '𝚋', 'c': '𝚌', 'd': '𝚍', 'e': '𝚎', 'f': '𝚏', 'g': '𝚐', 'h': '𝚑', 'i': '𝚒', 'j': '𝚓', 'k': '𝚔', 'l': '𝚕', 'm': '𝚖', 'n': '𝚗', 'o': '𝚘', 'p': '𝚙', 'q': '𝚚', 'r': '𝚛', 's': '𝚜', 't': '𝚝', 'u': '𝚞', 'v': '𝚟', 'w': '𝚠', 'x': '𝚡', 'y': '𝚢', 'z': '𝚣', 'A': '𝙰', 'B': '𝙱', 'C': '𝙲', 'D': '𝙳', 'E': '𝙴', 'F': '𝙵', 'G': '𝙶', 'H': '𝙷', 'I': '𝙸', 'J': '𝙹', 'K': '𝙺', 'L': '𝙻', 'M': '𝙼', 'N': '𝙽', 'O': '𝙾', 'P': '𝙿', 'Q': '𝚀', 'R': '𝚁', 'S': '𝚂', 'T': '𝚃', 'U': '𝚄', 'V': '𝚅', 'W': '𝚆', 'X': '𝚇', 'Y': '𝚈', 'Z': '𝚉', '0':'𝟶', '1':'𝟷', '2':'𝟸', '3':'𝟹', '4':'𝟺', '5':'𝟻', '6':'𝟼', '7':'𝟽', '8':'𝟾', '9':'𝟿' },
             'underline': { 'a':'a̲', 'b':'b̲', 'c':'c̲', 'd':'d̲', 'e':'e̲', 'f':'f̲', 'g':'g̲', 'h':'h̲', 'i':'i̲', 'j':'j̲', 'k':'k̲', 'l':'l̲', 'm':'m̲', 'n':'n̲', 'o':'o̲', 'p':'p̲', 'q':'q̲', 'r':'r̲', 's':'s̲', 't':'t̲', 'u':'u̲', 'v':'v̲', 'w':'w̲', 'x':'x̲', 'y':'y̲', 'z':'z̲', 'A':'A̲', 'B':'B̲', 'C':'C̲', 'D':'D̲', 'E':'E̲', 'F':'F̲', 'G':'G̲', 'H':'H̲', 'I':'I̲', 'J':'J̲', 'K':'K̲', 'L':'L̲', 'M':'M̲', 'N':'N̲', 'O':'O̲', 'P':'P̲', 'Q':'Q̲', 'R':'R̲', 'S':'S̲', 'T':'T̲', 'U':'U̲', 'V':'V̲', 'W':'W̲', 'X':'X̲', 'Y':'Y̲', 'Z':'Z̲', '0':'0̲', '1':'1̲', '2':'2̲', '3':'3̲', '4':'4̲', '5':'5̲', '6':'6̲', '7':'7̲', '8':'8̲', '9':'9̲'},
             'strikethrough': { 'a':'a̶', 'b':'b̶', 'c':'c̶', 'd':'d̶', 'e':'e̶', 'f':'f̶', 'g':'g̶', 'h':'h̶', 'i':'i̶', 'j':'j̶', 'k':'k̶', 'l':'l̶', 'm':'m̶', 'n':'n̶', 'o':'o̶', 'p':'p̶', 'q':'q̶', 'r':'r̶', 's':'s̶', 't':'t̶', 'u':'u̶', 'v':'v̶', 'w':'w̶', 'x':'x̶', 'y':'y̶', 'z':'z̶', 'A':'A̶', 'B':'B̶', 'C':'C̶', 'D':'D̶', 'E':'E̶', 'F':'F̶', 'G':'G̶', 'H':'H̶', 'I':'I̶', 'J':'J̶', 'K':'K̶', 'L':'L̶', 'M':'M̶', 'N':'N̶', 'O':'O̶', 'P':'P̶', 'Q':'Q̶', 'R':'R̶', 'S':'S̶', 'T':'T̶', 'U':'U̶', 'V':'V̶', 'W':'W̶', 'X':'X̶', 'Y':'Y̶', 'Z':'Z̶', '0':'0̶', '1':'1̶', '2':'2̶', '3':'3̶', '4':'4̶', '5':'5̶', '6':'6̶', '7':'7̶', '8':'8̶', '9':'9̶'}
         };
         
-        let reverseCharMap = {};
-        for (const format in charMaps) {
-            for (const char in charMaps[format]) {
-                reverseCharMap[charMaps[format][char]] = char;
+        const reverseCharMap = Object.fromEntries(
+            Object.values(charMaps).flatMap(map => Object.entries(map).map(([plain, unicode]) => [unicode, plain]))
+        );
+
+        const convertText = (str, format) => str.split('').map(char => charMaps[format]?.[char] || char).join('');
+        const normalizeText = (str) => str.split('').map(char => reverseCharMap[char] || char).join('');
+        
+        function applyFormat(format) {
+            editor.focus();
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+
+            const range = selection.getRangeAt(0);
+            const selectedText = range.toString();
+
+            if (selectedText) {
+                const plainText = normalizeText(selectedText);
+                const newText = format === 'clear' ? plainText : convertText(plainText, format);
+                
+                range.deleteContents();
+                range.insertNode(document.createTextNode(newText));
+
+                // Re-select the newly inserted text
+                selection.removeAllRanges();
+                selection.addRange(range);
+            } else if (format === 'clear') {
+                editor.textContent = normalizeText(editor.textContent);
             }
         }
-        
+
+        toolbar.addEventListener('click', (e) => {
+            const button = e.target.closest('.toolbar-btn');
+            if (!button) return;
+            
+            const { format, insert, action } = button.dataset;
+
+            if (format) {
+                applyFormat(format);
+            } else if (action === 'clear-formatting') {
+                applyFormat('clear');
+            } else if (insert) {
+                document.execCommand('insertText', false, insert);
+            }
+        });
+
+        // AI Feature Logic
         async function callSecureAPI(prompt, errorElement) {
             errorElement.classList.add('hidden');
             errorElement.textContent = '';
@@ -173,7 +200,7 @@
                         } else {
                            errorMessage = errorData.message || errorMessage;
                         }
-                    } catch (e) { /* Response was not JSON, use default error message. */ }
+                    } catch (e) { /* Response wasn't JSON */ }
                     throw new Error(errorMessage);
                 }
                 const result = await response.json();
@@ -195,8 +222,7 @@
                 modal.querySelector('.modal-content').classList.add('-translate-y-10');
                 setTimeout(() => {
                     modal.classList.add('pointer-events-none');
-                    const errorEl = modal.querySelector('[id$="Error"]');
-                    if (errorEl) errorEl.classList.add('hidden');
+                    modal.querySelector('[id$="Error"]')?.classList.add('hidden');
                 }, 300);
             }
         }
@@ -207,14 +233,7 @@
         }
 
         document.getElementById('writeWithAI').addEventListener('click', () => toggleModal(writeModal, true));
-        document.getElementById('improveWithAI').addEventListener('click', () => {
-            if (editor.textContent.trim()) {
-                toggleModal(improveModal, true);
-            } else {
-                alert('Editor is empty. Please write something first to improve it.');
-            }
-        });
-
+        document.getElementById('improveWithAI').addEventListener('click', () => editor.textContent.trim() ? toggleModal(improveModal, true) : alert('Editor is empty. Please write something first.'));
         document.getElementById('cancelWrite').addEventListener('click', () => toggleModal(writeModal, false));
         document.getElementById('cancelImprove').addEventListener('click', () => toggleModal(improveModal, false));
         
@@ -252,32 +271,8 @@
                 toggleButtonSpinner(generateImproveBtn, false);
             }
         });
-
-        function convertText(str, format) {
-            const map = charMaps[format];
-            if (!map) return str;
-            return str.split('').map(char => map[char] || char).join('');
-        }
-
-        toolbar.addEventListener('click', (e) => {
-            const button = e.target.closest('.toolbar-btn');
-            if (!button) return;
-            const format = button.dataset.format, insert = button.dataset.insert, action = button.dataset.action;
-            editor.focus();
-            const selection = window.getSelection();
-            if (format) {
-                if (selection.rangeCount && !selection.isCollapsed) document.execCommand('insertText', false, convertText(selection.toString(), format));
-            } else if (insert) {
-                document.execCommand('insertText', false, insert);
-            } else if (action === 'clear-formatting') {
-                 if (selection.rangeCount && !selection.isCollapsed) {
-                    document.execCommand('insertText', false, selection.toString().split('').map(char => reverseCharMap[char] || char).join(''));
-                 } else {
-                    editor.textContent = editor.textContent.split('').map(char => reverseCharMap[char] || char).join('');
-                 }
-            }
-        });
         
+        // Copy Logic
         copyBtn.addEventListener('click', () => {
             const textToCopy = editor.textContent;
             if (!textToCopy) return;
